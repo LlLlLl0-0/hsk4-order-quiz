@@ -58,18 +58,17 @@
             visibility: visible;
             z-index: 10;
         }
-        /* 右侧导航栏 - 紧凑每行4个 */
         .side-nav {
             width: 140px;
             background: rgba(44, 62, 80, 0.95);
             backdrop-filter: blur(8px);
             color: white;
-            padding: 12px 6px;
+            padding: 12px 8px;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 16px;
             z-index: 25;
             box-shadow: -2px 0 12px rgba(0,0,0,0.2);
             height: 100%;
@@ -78,18 +77,18 @@
         }
         .nav-category {
             border-bottom: 1px solid #5d6e7e;
-            padding-bottom: 6px;
+            padding-bottom: 8px;
         }
         .nav-category h4 {
-            font-size: 12px;
-            margin-bottom: 8px;
+            font-size: 13px;
+            margin-bottom: 10px;
             text-align: center;
             color: #f1c40f;
         }
         .question-links {
             display: flex;
             flex-wrap: wrap;
-            gap: 4px;
+            gap: 8px;
             justify-content: space-between;
         }
         .q-link {
@@ -97,15 +96,13 @@
             border: 1px solid #5d6e7e;
             border-radius: 30px;
             padding: 4px 0;
-            font-size: 12px;
+            font-size: 13px;
             color: white;
             cursor: pointer;
             transition: 0.2s;
             text-align: center;
-            flex: 0 0 calc(25% - 3px);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            flex: 0 0 calc(25% - 6px);
+            white-space: normal;
         }
         .q-link.visited {
             background: #27ae60;
@@ -114,18 +111,15 @@
         .q-link:active {
             transform: scale(0.96);
         }
-        /* 手机端每行3个 */
         @media (max-width: 700px) {
-            .side-nav { width: 110px; padding: 10px 4px; }
-            .q-link { font-size: 11px; padding: 3px 0; flex: 0 0 calc(33.33% - 3px); }
+            .side-nav { width: 110px; }
+            .q-link { flex: 0 0 calc(33.33% - 6px); font-size: 11px; padding: 3px 0; }
             .nav-category h4 { font-size: 11px; }
-            .question-links { gap: 3px; }
         }
-        /* 答案徽章 - 右上角 */
         .answer-badge {
             position: fixed;
             top: 10px;
-            right: 150px;
+            right: 160px;
             background: #2c3e50;
             color: #f1c40f;
             padding: 4px 12px;
@@ -136,11 +130,11 @@
             z-index: 20;
             box-shadow: 0 1px 4px rgba(0,0,0,0.2);
         }
-        /* 原题号映射 - 右下角，避开右侧栏 */
+        /* 原题号映射 - 左下角 */
         .source {
             position: fixed;
             bottom: 8px;
-            right: 155px;
+            left: 8px;
             font-size: 11px;
             color: #aaa;
             background: rgba(255,255,240,0.9);
@@ -152,11 +146,10 @@
         }
         @media (max-width: 700px) {
             .answer-badge { right: 120px; font-size: 14px; padding: 3px 8px; top: 8px; }
-            .source { right: 120px; font-size: 10px; bottom: 6px; }
+            .source { left: 6px; font-size: 10px; bottom: 6px; }
             .slide { padding-bottom: 95px; }
             .scroll-placeholder { height: 75px; }
         }
-        /* 内容样式 */
         .q-header {
             font-size: 22px;
             font-weight: bold;
@@ -203,7 +196,6 @@
             margin-top: 10px;
             line-height: 1.4;
         }
-        /* 底部导航栏 */
         .nav-controls {
             position: fixed;
             bottom: 8px;
@@ -234,7 +226,6 @@
             font-size: 13px;
             color: white;
         }
-        /* 分类卡片 */
         .category-card {
             background: #f0f7ff;
             border-radius: 20px;
@@ -282,7 +273,7 @@
             .category-desc { font-size: 15px; }
             .nav-controls button { font-size: 11px; padding: 3px 8px; }
             .answer-badge { right: 110px; font-size: 13px; }
-            .source { right: 110px; font-size: 9px; }
+            .source { left: 5px; font-size: 9px; bottom: 5px; }
         }
     </style>
 </head>
@@ -306,8 +297,9 @@
         return `P${origPage}-${origNo}`;
     }
 
-    // 50题数据（完整，与之前相同）
+    // 按大类排序后的50题数据（完整，与之前最终版一致）
     const questions = [
+        // 代词类（1-13）
         { newNo:1, origPage:1, origNo:34, a:"这样不但能使学生增长知识", b:"还能提高他们的理解能力和写作水平", c:"养成课外阅读的习惯很重要", answer:"CAB", explanation:"C先提出观点。“这样”指代“课外阅读的习惯”，所以A在C后。B用“还能”继续补充。" },
         { newNo:2, origPage:2, origNo:31, a:"这种事情一直在发生，谁也不能改变", b:"地球上每分钟都有新的生命出现", c:"也有老的生命死去", answer:"BCA", explanation:"B和C先说“新生命出现”和“老生命死去”。A用“这种事情”指代前面说的生和死。" },
         { newNo:3, origPage:3, origNo:31, a:"写得特别详细，而且十分有趣", b:"这本杂志介绍了中国很多著名的景点", c:"其中介绍黄河的那一篇", answer:"BCA", explanation:"B先介绍杂志。C用“其中”指代杂志里的一篇。A具体描写那一篇。" },
@@ -321,6 +313,7 @@
         { newNo:11, origPage:9, origNo:32, a:"开车千万别喝酒，喝酒千万别开车", b:"每个人都应该记住这句话", c:"法律禁止司机酒后开车", answer:"CAB", explanation:"C先说法津禁止。A说那句口号。B用“这句话”指代，说每个人应该记住。" },
         { newNo:12, origPage:11, origNo:57, a:"那些店里卖的东西都还不错", b:"宽街两边都是一些小商店", c:"有空儿你可以去逛逛", answer:"BAC", explanation:"B先说宽街两边有小商店。A用“那些”指代，说东西不错。C建议有空去逛逛。" },
         { newNo:13, origPage:12, origNo:65, a:"它以简单易懂的语言，举例说明生活中的知识", b:"《十万个为什么》的内容包括动植物、科技等方面", c:"在增长孩子科学知识方面起到了积极的作用", answer:"BAC", explanation:"B先介绍书的内容。A用“它”指代，说以简单语言举例。C说起到了积极作用。" },
+        // 关联/提示词类（14-38）
         { newNo:14, origPage:1, origNo:32, a:"否则读书对自己就没有什么帮助了", b:"不能完全相信书本", c:"看书时应该有自己的想法和判断", answer:"CBA", explanation:"C提出观点。B进一步说明。A用“否则”表示不这样做的坏结果。" },
         { newNo:15, origPage:1, origNo:33, a:"有些书可以很快地读", b:"读书应该有选择", c:"然而，有些书却需要多花时间来认真读", answer:"BAC", explanation:"B先说“应该有选择”。A举一种情况（快读）。C用“然而”转折，说另一种情况（慢读）。" },
         { newNo:16, origPage:2, origNo:32, a:"很多人以为误会是小事，不去解决它", b:"其实相反，误会需要我们及时解释清楚", c:"两个人在一起，总会出现一些误会", answer:"CAB", explanation:"C先说会出现误会。A说很多人以为小事不解决。B用“其实相反”转折，说需要及时解释。" },
@@ -346,6 +339,7 @@
         { newNo:36, origPage:12, origNo:63, a:"《人与自然》这个节目一直很受欢迎", b:"还可以看到美丽的自然景色", c:"通过这个节目，观众不但能学到自然科学知识", answer:"ACB", explanation:"A总说节目受欢迎。C说能学到知识。B用“还”说能看到景色。" },
         { newNo:37, origPage:12, origNo:64, a:"最好的办法就是努力证明自己是正确的", b:"不同的人对同一件事的认识可能各不相同", c:"如果想让别人同意或者支持你的看法", answer:"BCA", explanation:"B说认识各不相同。C用“如果”提出条件。A说最好办法是证明自己正确。" },
         { newNo:38, origPage:5, origNo:31, a:"有些人会因为听到了真话而感到高兴", b:"直接说出反对意见或者看法", c:"而另一些人却会认为是批评而十分难过", answer:"BAC", explanation:"B先说“说出反对意见”。A说有些人会高兴。C用“而”对比，说另一些人会难过。" },
+        // 逻辑类（39-50）
         { newNo:39, origPage:2, origNo:33, a:"以上就是我们这次啤酒节的活动内容", b:"对于这个活动安排，我们可以一起商量", c:"大家还有什么好的主意或意见尽管提", answer:"ACB", explanation:"A先总结活动内容。C请大家提意见。B说对这个安排一起商量。" },
         { newNo:40, origPage:2, origNo:34, a:"人们常说“友谊地久天长”", b:"能够一直继续下去，直到永远", c:"意思是希望友好关系", answer:"ACB", explanation:"A先说名言。C解释意思。B说结果“一直继续”。" },
         { newNo:41, origPage:3, origNo:34, a:"上次的春游活动小夏组织得不错", b:"这次还是由她来负责安排吧", c:"大家都玩儿得很高兴", answer:"ACB", explanation:"A说上次小夏组织好。C说大家玩得高兴。B说“这次”还让她负责。" },
@@ -370,19 +364,19 @@
         <div class="slide" id="slide_${slideIdx}">
             <div class="q-header" style="border-left-color: #3498db;">📚 排列顺序题 三大类型</div>
             <div class="category-card" data-cat="pronoun">
-                <div class="category-title">🔖 代词类</div>
+                <div class="category-title">🔖 代词指代类</div>
                 <div class="category-desc"><strong>解题思路：</strong> 代词（它、这、那、其中、这样、那样、她、他、他们等）指代前文。先出现名词，后出现代词。</div>
-                <div class="question-range">📌 题号 1 → 13</div>
+                <div class="question-range">📌 新题号 1 → 13</div>
             </div>
             <div class="category-card" data-cat="conj">
                 <div class="category-title">🔗 关联/提示词类</div>
                 <div class="category-desc"><strong>解题思路：</strong> 注意“因为/所以、但是、然而、否则、其实、相反、因此、结果、既然、只要/就、即使/也、不仅/还、却、而、如果”等。</div>
-                <div class="question-range">📌 题号 14 → 38</div>
+                <div class="question-range">📌 新题号 14 → 38</div>
             </div>
             <div class="category-card" data-cat="logic">
-                <div class="category-title">🧠 逻辑类</div>
+                <div class="category-title">🧠 逻辑顺序类</div>
                 <div class="category-desc"><strong>解题思路：</strong> 无明显代词或关联词，按常识排序：时间先后、因果、总分、步骤、问题→解决办法。</div>
-                <div class="question-range">📌 题号 39 → 50</div>
+                <div class="question-range">📌 新题号 39 → 50</div>
             </div>
             <div class="explanation" style="margin-top: 16px;">💡 点击卡片进入分类第一题；右侧题号变色表示已看过（刷新后重置）。</div>
             <div class="source">分类说明页</div>
@@ -457,9 +451,9 @@
         const logicNos = [39,40,41,42,43,44,45,46,47,48,49,50];
         
         let html = `
-            <div class="nav-category"><h4>📌 代词类</h4><div class="question-links" id="pronoun-links"></div></div>
+            <div class="nav-category"><h4>📌 代词指代类</h4><div class="question-links" id="pronoun-links"></div></div>
             <div class="nav-category"><h4>🔗 关联/提示词类</h4><div class="question-links" id="conj-links"></div></div>
-            <div class="nav-category"><h4>🧠 逻辑类</h4><div class="question-links" id="logic-links"></div></div>
+            <div class="nav-category"><h4>🧠 逻辑顺序类</h4><div class="question-links" id="logic-links"></div></div>
         `;
         document.getElementById('sideNav').innerHTML = html;
         
